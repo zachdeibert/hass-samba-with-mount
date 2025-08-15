@@ -17,7 +17,7 @@ Follow these steps to get the add-on installed on your system:
 
 [![Open your Home Assistant instance and show storage information.](https://my.home-assistant.io/badges/storage.svg)](https://my.home-assistant.io/redirect/storage/)
 
-![Map USB drive as network storage](docs/storage.png)
+![Map USB drive as network storage](https://raw.githubusercontent.com/zachdeibert/hass-samba-with-mount/refs/heads/master/docs/storage.png)
 
 ## Connection
 
