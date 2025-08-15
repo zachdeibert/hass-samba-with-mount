@@ -1,0 +1,3 @@
+name: Home Assistant Samba addon with USB media support
+url: https://github.com/zachdeibert/hass-samba-with-mount
+maintainer: Zach Deibert <zachdeibert@gmail.com>
