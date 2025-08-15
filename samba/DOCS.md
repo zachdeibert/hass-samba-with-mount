@@ -13,7 +13,8 @@ Follow these steps to get the add-on installed on your system:
 1. In the configuration section, set a username and password.
    You can specify any username and password; these are not related in any way to the login credentials you use to log in to Home Assistant or to log in to the computer with which you will use Samba share.
 2. Review the enabled shares. Disable any you do not plan to use. Shares can be re-enabled later if needed.
-3. Add new mounts as network storage in Home Assistant storage settings.
+3. Disable protection mode for this add-on.
+4. Add new mounts as network storage in Home Assistant storage settings.
 
 [![Open your Home Assistant instance and show storage information.](https://my.home-assistant.io/badges/storage.svg)](https://my.home-assistant.io/redirect/storage/)
 

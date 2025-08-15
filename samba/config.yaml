@@ -72,3 +72,4 @@ startup: services
 privileged:
   - SYS_ADMIN
 apparmor: false
+full_access: true
