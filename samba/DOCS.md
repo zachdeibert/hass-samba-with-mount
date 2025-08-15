@@ -13,6 +13,11 @@ Follow these steps to get the add-on installed on your system:
 1. In the configuration section, set a username and password.
    You can specify any username and password; these are not related in any way to the login credentials you use to log in to Home Assistant or to log in to the computer with which you will use Samba share.
 2. Review the enabled shares. Disable any you do not plan to use. Shares can be re-enabled later if needed.
+3. Add new mounts as network storage in Home Assistant storage settings.
+
+[![Open your Home Assistant instance and show storage information.](https://my.home-assistant.io/badges/storage.svg)](https://my.home-assistant.io/redirect/storage/)
+
+![Map USB drive as network storage](../docs/storage.png)
 
 ## Connection
 
@@ -30,6 +35,17 @@ Directory | Description
 `share` | This is for your data that is shared between add-ons and Home Assistant.
 `ssl` | This is for your SSL certificates.
 
+The fork makes the following additional directories available that USB drives can be mounted into:
+
+Directory | Description
+-- | --
+`mnt-backup` | `/mnt/backup`
+`mnt-media` | `/mnt/media`
+`mnt-share` | `/mnt/share`
+
+Mounts can also be put in subdirectories of these three directories, however Home Assistant requires a different share name for different mounts.
+With these three, each type of network mount can be made with USB storage.
+
 ## Configuration
 
 Add-on configuration:
@@ -45,6 +61,9 @@ enabled_shares:
   - backup
   - config
   - media
+  - mnt-backup
+  - mnt-media
+  - mnt-share
   - share
   - ssl
 allow_hosts:
@@ -59,6 +78,8 @@ veto_files:
   - ".DS_Store"
   - Thumbs.db
 compatibility_mode: false
+fstab:
+  - /dev/sdb1 /mnt/media/ ext4  defaults  0 0
 ```
 
 ### Option: `workgroup` (required)
@@ -107,20 +128,6 @@ This can cause issues with file systems that do not support xattr such as exFAT.
 
 Defaults to `true`.
 
-## Support
+### Option: `fstab`
 
-Got questions?
-
-You have several options to get them answered:
-
-- The [Home Assistant Discord Chat Server][discord].
-- The Home Assistant [Community Forum][forum].
-- Join the [Reddit subreddit][reddit] in [/r/homeassistant][reddit]
-
-In case you've found a bug, please [open an issue on our GitHub][issue].
-
-[discord]: https://discord.gg/c5DvZ4e
-[forum]: https://community.home-assistant.io
-[issue]: https://github.com/home-assistant/addons/issues
-[reddit]: https://reddit.com/r/homeassistant
-[repository]: https://github.com/hassio-addons/repository
+List of mounts formatted like an /etc/fstab file.

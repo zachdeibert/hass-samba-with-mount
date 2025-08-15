@@ -1,6 +1,8 @@
-# Home Assistant Add-on: Samba share
+# Home Assistant Add-on: Samba share (with mount)
 
 Share your configuration over the network using Windows file sharing.
+
+This fork additionally allows mounting a USB drive as network storage to use with Home Assistant.
 
 ![Supports aarch64 Architecture][aarch64-shield] ![Supports amd64 Architecture][amd64-shield] ![Supports armhf Architecture][armhf-shield] ![Supports armv7 Architecture][armv7-shield] ![Supports i386 Architecture][i386-shield]
 

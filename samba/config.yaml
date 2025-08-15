@@ -1,10 +1,9 @@
 ---
 version: 12.5.2
 slug: samba
-name: Samba share
-description: Expose Home Assistant folders with SMB/CIFS
-url: https://github.com/home-assistant/addons/tree/master/samba
-codenotary: notary@home-assistant.io
+name: Samba share (with mount)
+description: Expose Home Assistant folders with SMB/CIFS and additional USB media
+url: https://github.com/zachdeibert/hass-samba-with-mount/tree/master/samba
 arch:
   - armhf
   - armv7
@@ -13,7 +12,6 @@ arch:
   - i386
 hassio_api: true
 host_network: true
-image: homeassistant/{arch}-addon-samba
 init: false
 map:
   - addons:rw
@@ -34,6 +32,9 @@ options:
     - backup
     - config
     - media
+    - mnt-backup
+    - mnt-media
+    - mnt-share
     - share
     - ssl
   compatibility_mode: false
@@ -51,17 +52,23 @@ options:
     - 169.254.0.0/16
     - fe80::/10
     - fc00::/7
+  fstab: []
 schema:
   username: str
   password: password
   workgroup: str
   local_master: bool
   enabled_shares:
-    - "match(^(?i:(addons|addon_configs|backup|config|media|share|ssl))$)"
+    - "match(^(?i:(addons|addon_configs|backup|config|media|mnt-backup|mnt-media|mnt-share|share|ssl))$)"
   compatibility_mode: bool
   apple_compatibility_mode: bool
   veto_files:
     - str
   allow_hosts:
     - str
+  fstab:
+    - "match(^\\S+\\s+\\S+\\s+\\S+\\s+\\S+\\s+[0-9]+\\s+[0-2]$)"
 startup: services
+privileged:
+  - SYS_ADMIN
+apparmor: false

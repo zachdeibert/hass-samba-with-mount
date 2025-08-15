@@ -121,3 +121,42 @@
    veto files = /{{ .veto_files | join "/" }}/
    delete veto files = {{ eq (len .veto_files) 0 | ternary "no" "yes" }}
 {{ end }}
+
+{{ if (has "mnt-backup" .enabled_shares) }}
+[mnt-backup]
+   browseable = yes
+   writeable = yes
+   path = /mnt/backup
+
+   valid users = {{ .username }}
+   force user = root
+   force group = root
+   veto files = /{{ .veto_files | join "/" }}/
+   delete veto files = {{ eq (len .veto_files) 0 | ternary "no" "yes" }}
+{{ end }}
+
+{{ if (has "mnt-media" .enabled_shares) }}
+[mnt-media]
+   browseable = yes
+   writeable = yes
+   path = /mnt/media
+
+   valid users = {{ .username }}
+   force user = root
+   force group = root
+   veto files = /{{ .veto_files | join "/" }}/
+   delete veto files = {{ eq (len .veto_files) 0 | ternary "no" "yes" }}
+{{ end }}
+
+{{ if (has "mnt-share" .enabled_shares) }}
+[mnt-share]
+   browseable = yes
+   writeable = yes
+   path = /mnt/share
+
+   valid users = {{ .username }}
+   force user = root
+   force group = root
+   veto files = /{{ .veto_files | join "/" }}/
+   delete veto files = {{ eq (len .veto_files) 0 | ternary "no" "yes" }}
+{{ end }}

@@ -1,0 +1,22 @@
+#!/command/with-contenv bashio
+# vim: ft=bash
+# shellcheck shell=bash
+# ==============================================================================
+# Mount the fstab to share over Samba
+# ==============================================================================
+
+# Create root directories
+mkdir -p /mnt/backup /mnt/media /mnt/share
+
+# Start with a blank fstab
+echo > /etc/fstab
+
+# Mount each fstab entry in series
+cat "/data/options.json" | jq --raw-output '(.fstab | @csv) + ","' | tr -d '"' | while read -d , entry; do
+    echo "$entry" >> /etc/fstab
+    mount_point="$(echo "$entry" | sed -e "s|^\S*\s*\(\S*\).*|\1|")"
+    if echo "$mount_point" | grep "^/" > /dev/null; then
+        mkdir -p "$mount_point"
+    fi
+    mount -a
+done
